@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>Motivational Tool</h1>
+    <h1>Motivational Pool</h1>
     <router-view/>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>{{ msg }}</h1>
-
+    <router-link to="/overview">Click to Begin</router-link>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Motivational Tool Home'
+      msg: 'A motivation tool for AppSocially'
     }
   }
 }
