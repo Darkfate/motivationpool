@@ -15,25 +15,13 @@
             <th>Source</th>
             <th>Detailed plan(if any)</th>
           </tr>
-          <tr v-for="item in items" v-bind:key="item.id">
-            <td>{{item.id}}</td>
-            <td>{{item.name}}</td>
-            <td>{{getStatus(item)}}</td>
-            <td>{{item.year}}</td>
-            <td>{{item.month}}</td>
-            <td>{{item.target}}</td>
-            <td>{{item.goal}}</td>
-            <td>{{item.progress}}</td>
-            <td>{{getProgress(item)}}</td>
-            <td>{{item.unit}}</td>
-            <td>{{item.source}}</td>
-            <td>{{item.details}}</td>
-          </tr>
+          <motivation-item v-for="item in items" v-bind:key="item.id" v-bind="item"></motivation-item>
       </table>
   </div>
 </template>
 
 <script>
+import MotivationItem from '@/components/MotivationItem'
 
 var sampleData = [
   {
@@ -68,13 +56,8 @@ export default {
       items: sampleData
     }
   },
-  methods: {
-    getProgress: function (item) {
-      return item.progress - item.goal
-    },
-    getStatus: function (item) {
-      return this.getProgress(item) >= 0 ? 'Unachieved' : 'Achieved'
-    }
+  components: {
+    MotivationItem
   }
 }
 </script>
