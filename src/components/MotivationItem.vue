@@ -104,7 +104,7 @@ export default {
       return this.getProgress >= 0 ? 'Unachieved' : 'Achieved'
     },
     isAdd: function () {
-      return this.id === 0
+      return this.id === ''
     },
     allowChange: function () {
       return this.isEdit || this.isAdd
@@ -117,10 +117,24 @@ export default {
     save: function () {
       if (this.isEdit) {
         this.isEdit = false
-        this.$emit('update', this.data)
+        this.$emit('update', this.validate(this.data))
       }
       if (this.isAdd) {
-        this.$emit('add', this.data)
+        this.$emit('add', this.validate(this.data))
+      }
+    },
+    validate: function (rawData) {
+      return {
+        id: rawData.id || '',
+        name: rawData.name || '',
+        year: parseInt(rawData.year || 0),
+        month: parseInt(rawData.month || 0),
+        target: rawData.target || '',
+        goal: parseInt(rawData.goal || 0),
+        progress: parseInt(rawData.progress || 0),
+        unit: rawData.unit || '',
+        source: rawData.source || '',
+        details: rawData.details || ''
       }
     }
   }

@@ -43,12 +43,14 @@ export default {
   },
   methods: {
     updateItem: function (item) {
-      var index = this.items.findIndex(i => i.id === item.id)
-      this.items[index] = item
+      db.collection('items')
+        .doc(item.id)
+        .set(item)
+        .then(() => console.log('Item Updated'))
     },
     addItem: function () {
       this.newItem = {
-        id: 0,
+        id: '',
         name: '',
         year: new Date().getFullYear(),
         month: new Date().getMonth() + 1,
@@ -63,8 +65,10 @@ export default {
       this.addingNewItem = true
     },
     saveNewItem: function (item) {
-      item.id = this.items[this.items.length - 1].id + 1
-      this.items.push(item)
+      db.collection('items')
+        .add(item)
+        .then(() => console.log('Item Added'))
+
       this.newItem = {}
       this.addingNewItem = false
     }
