@@ -56,7 +56,7 @@
 export default {
   name: 'MotivationItem',
   props: {
-    id: Number,
+    id: String,
     name: String,
     year: Number,
     month: Number,
@@ -83,6 +83,18 @@ export default {
       },
       isEdit: false
     }
+  },
+  watch: {
+    id: { deep: true, handler: function (newVal) { this.data.id = newVal } },
+    name: { deep: true, handler: function (newVal) { this.data.name = newVal } },
+    year: { deep: true, handler: function (newVal) { this.data.year = newVal } },
+    month: { deep: true, handler: function (newVal) { this.data.month = newVal } },
+    target: { deep: true, handler: function (newVal) { this.data.target = newVal } },
+    goal: { deep: true, handler: function (newVal) { this.data.goal = newVal } },
+    progress: { deep: true, handler: function (newVal) { this.data.progress = newVal } },
+    unit: { deep: true, handler: function (newVal) { this.data.unit = newVal } },
+    source: { deep: true, handler: function (newVal) { this.data.source = newVal } },
+    details: { deep: true, handler: function (newVal) { this.data.details = newVal } }
   },
   computed: {
     getProgress: function () {
