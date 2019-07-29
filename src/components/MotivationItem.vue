@@ -1,53 +1,53 @@
 <template>
   <tr>
     <td>
-      <div>{{data.id}}</div>
+      <div>{{isAdd? '': data.id}}</div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.name}}</div>
-        <div v-if="isEdit"><input v-model="data.name"/></div>
+        <div v-if="!allowChange">{{data.name}}</div>
+        <div v-if="allowChange"><input v-model="data.name"/></div>
     </td>
     <td>
         <div>{{getStatus}}</div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.year}}</div>
-        <div v-if="isEdit"><input v-model="data.year"/></div>
+        <div v-if="!allowChange">{{data.year}}</div>
+        <div v-if="allowChange"><input v-model="data.year"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.month}}</div>
-        <div v-if="isEdit"><input v-model="data.month"/></div>
+        <div v-if="!allowChange">{{data.month}}</div>
+        <div v-if="allowChange"><input v-model="data.month"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.target}}</div>
-        <div v-if="isEdit"><input v-model="data.target"/></div>
+        <div v-if="!allowChange">{{data.target}}</div>
+        <div v-if="allowChange"><input v-model="data.target"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.goal}}</div>
-        <div v-if="isEdit"><input v-model="data.goal"/></div>
+        <div v-if="!allowChange">{{data.goal}}</div>
+        <div v-if="allowChange"><input type="number" v-model="data.goal"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.progress}}</div>
-        <div v-if="isEdit"><input v-model="data.progress"/></div>
+        <div v-if="!allowChange">{{data.progress}}</div>
+        <div v-if="allowChange"><input v-model="data.progress"/></div>
     </td>
     <td>
         <div>{{getProgress}}</div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.unit}}</div>
-        <div v-if="isEdit"><input v-model="data.unit"/></div>
+        <div v-if="!allowChange">{{data.unit}}</div>
+        <div v-if="allowChange"><input v-model="data.unit"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.source}}</div>
-        <div v-if="isEdit"><input v-model="data.source"/></div>
+        <div v-if="!allowChange">{{data.source}}</div>
+        <div v-if="allowChange"><input v-model="data.source"/></div>
     </td>
     <td>
-        <div v-if="!isEdit">{{data.details}}</div>
-        <div v-if="isEdit"><input v-model="data.details"/></div>
+        <div v-if="!allowChange">{{data.details}}</div>
+        <div v-if="allowChange"><input v-model="data.details"/></div>
     </td>
     <td>
-        <a v-if="!isEdit" v-on:click="edit()">Edit</a>
-        <a v-if="isEdit" v-on:click="save()">Save</a>
+        <a v-if="!allowChange" v-on:click="edit()">Edit</a>
+        <a v-if="allowChange" v-on:click="save()">Save</a>
     </td>
   </tr>
 </template>
@@ -90,6 +90,12 @@ export default {
     },
     getStatus: function (item) {
       return this.getProgress >= 0 ? 'Unachieved' : 'Achieved'
+    },
+    isAdd: function () {
+      return this.id === 0
+    },
+    allowChange: function () {
+      return this.isEdit || this.isAdd
     }
   },
   methods: {
@@ -97,8 +103,13 @@ export default {
       this.isEdit = true
     },
     save: function () {
-      this.isEdit = false
-      this.$emit('update', this.data)
+      if (this.isEdit) {
+        this.isEdit = false
+        this.$emit('update', this.data)
+      }
+      if (this.isAdd) {
+        this.$emit('add', this.data)
+      }
     }
   }
 }
