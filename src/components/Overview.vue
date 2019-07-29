@@ -1,6 +1,6 @@
 <template>
   <div>
-      <table>
+      <table style="width: 80vw">
           <tr>
             <th>Id</th>
             <th>Name</th>
@@ -15,7 +15,7 @@
             <th>Source</th>
             <th>Detailed plan(if any)</th>
           </tr>
-          <motivation-item v-for="item in items" v-bind:key="item.id" v-bind="item"></motivation-item>
+          <motivation-item v-for="item in items" v-bind:key="item.id" v-bind="item" v-on:update="updateItem"></motivation-item>
       </table>
   </div>
 </template>
@@ -58,6 +58,12 @@ export default {
   },
   components: {
     MotivationItem
+  },
+  methods: {
+    updateItem: function (item) {
+      var index = this.items.findIndex(i => i.id === item.id)
+      this.items[index] = item
+    }
   }
 }
 </script>
