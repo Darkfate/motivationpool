@@ -5,7 +5,7 @@
                 <v-flex xs3 sm3 md3><div class="title">Current Pool: {{totalValue()}}円</div></v-flex>
                 <v-flex xs3 sm3 md3><div class="title">Total Fail: {{totalFail}}</div></v-flex>
             </v-layout>
-s        </v-container>
+        </v-container>
     </v-card>
 </template>
 <script>
