@@ -1,7 +1,7 @@
 <template>
 <div>
     <h2>Overview</h2>
-    <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1">
+    <v-data-table :headers="headers" :items="items" :sort-by="['year', 'month']" :sort-desc="[false, false]" :items-per-page="5" class="elevation-1">
         <template v-slot:top>
             <v-toolbar flat color="white">
             <v-spacer></v-spacer>

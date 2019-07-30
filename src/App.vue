@@ -1,6 +1,6 @@
 <template>
   <div id="app" data-app="true" class="v-application">
-    <v-navigation-drawer :clipped="true" app>
+    <v-navigation-drawer :width="100" :clipped="true" app>
       <v-list dense nav>
           <v-list-item v-for="item in navItems" :key="item.title" link>
             <v-list-item-content>
