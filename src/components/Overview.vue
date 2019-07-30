@@ -1,4 +1,6 @@
 <template>
+<div>
+    <h2>Overview</h2>
     <v-data-table :headers="headers" :items="items" :items-per-page="5" class="elevation-1">
         <template v-slot:top>
             <v-toolbar flat color="white">
@@ -54,16 +56,24 @@
             </v-toolbar>
         </template>
         <template v-slot:item.archieved="{ item }">
-            {{getStatus(item)}}
+            <v-chip :color="getStatus(item) ? 'green' : 'red'" dark>{{getStatus(item) ? 'Achieved' : 'Unachieved'}}</v-chip>
+        </template>>
+        <template v-slot:item.goal="{ item }">
+            {{item.goal}}{{item.unit}}
+        </template>>
+        <template v-slot:item.progress="{ item }">
+            {{item.goal}}{{item.unit}}
         </template>>
         <template v-slot:item.achievement="{ item }">
-            {{getProgress(item)}}
+            <div v-bind:class="{'green--text': getProgress(item) >= 0, 'red--text': getProgress(item) < 0}">{{getProgress(item)}}{{item.unit}}</div>
         </template>>
         <template v-slot:item.action="{ item }">
             <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
             <v-icon small @click="deleteItem(item)">delete</v-icon>
         </template>
     </v-data-table>
+</div>
+
 </template>
 
 <script>
@@ -74,18 +84,17 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'Id', value: 'id' },
+        { text: 'Id', value: 'id', align: 'center' },
         { text: 'Name', value: 'name' },
-        { text: 'Archieved', value: 'archieved' },
-        { text: 'Year', value: 'year' },
-        { text: 'Month', value: 'month' },
-        { text: 'Target', value: 'target' },
-        { text: 'Goal', value: 'goal' },
-        { text: 'Progress', value: 'progress' },
-        { text: 'Achievement', value: 'achievement' },
-        { text: 'Unit', value: 'unit' },
-        { text: 'Source', value: 'source' },
-        { text: 'Detailed plan(if any)', value: 'details' },
+        { text: 'Archieved', value: 'archieved', align: 'center' },
+        { text: 'Year', value: 'year', align: 'center' },
+        { text: 'Month', value: 'month', align: 'center' },
+        { text: 'Target', value: 'target', align: 'center' },
+        { text: 'Goal', value: 'goal', align: 'center' },
+        { text: 'Progress', value: 'progress', align: 'center' },
+        { text: 'Achievement', value: 'achievement', align: 'center' },
+        { text: 'Source', value: 'source', align: 'center' },
+        { text: 'Detailed plan(if any)', value: 'details', align: 'center' },
         { text: 'Actions', value: 'action', sortable: false }
       ],
       items: [],
@@ -140,7 +149,7 @@ export default {
       this.dialog = true
     },
     getStatus: function (item) {
-      return this.getProgress(item) >= 0 ? 'Achieved' : 'Unachieved'
+      return this.getProgress(item) >= 0
     },
     getProgress: function (item) {
       return item.progress - item.goal
