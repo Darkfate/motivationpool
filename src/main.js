@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import { firestorePlugin } from 'vuefire'
+import vuetify from './plugin/vuetify'
 
 Vue.config.productionTip = false
 Vue.use(firestorePlugin)
@@ -12,6 +13,7 @@ Vue.use(firestorePlugin)
 new Vue({
   el: '#app',
   router,
+  vuetify,
   components: { App },
   template: '<App/>'
 })

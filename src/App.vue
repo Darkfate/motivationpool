@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" data-app="true">
     <h1>Motivational Pool</h1>
     <router-view/>
   </div>
