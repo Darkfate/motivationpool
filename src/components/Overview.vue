@@ -4,55 +4,55 @@
     <v-data-table :headers="headers" :items="items" :sort-by="['year', 'month']" :sort-desc="[false, false]" :items-per-page="5" class="elevation-1">
         <template v-slot:top>
             <v-toolbar flat color="white">
-            <v-spacer></v-spacer>
-            <v-dialog v-model="dialog" max-width="500px">
-                <template v-slot:activator="{ on }">
-                    <v-btn color="primary" dark class="mb-2" @click="addItem()">New Item</v-btn>
-                </template>
-                <v-card>
-                    <v-card-title>
-                    <span class="headline">Edit Item</span>
-                    </v-card-title>
-                    <v-card-text>
-                    <v-container grid-list-md>
-                        <v-layout wrap>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.year" label="Year"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.month" label="Month"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.target" label="Target"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.goal" label="Goal"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.progress" label="Progress"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.unit" label="Unit"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.source" label="Source"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 md4>
-                            <v-text-field v-model="editedItem.details" label="Details"></v-text-field>
-                        </v-flex>
-                        </v-layout>
-                    </v-container>
-                    </v-card-text>
-                    <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="closeDialog">Cancel</v-btn>
-                    <v-btn color="blue darken-1" text @click="updateItem">Save</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+                <v-spacer></v-spacer>
+                <v-dialog v-model="dialog" max-width="500px">
+                    <template v-slot:activator="{ on }">
+                        <v-btn color="primary" dark class="mb-2" @click="addItem()">New Item</v-btn>
+                    </template>
+                    <v-card>
+                        <v-card-title>
+                        <span class="headline">Edit Item</span>
+                        </v-card-title>
+                        <v-card-text>
+                        <v-container grid-list-md>
+                            <v-layout wrap>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.name" label="Name"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.year" label="Year"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.month" label="Month"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.target" label="Target"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.goal" label="Goal"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.progress" label="Progress"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.unit" label="Unit"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.source" label="Source"></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field v-model="editedItem.details" label="Details"></v-text-field>
+                            </v-flex>
+                            </v-layout>
+                        </v-container>
+                        </v-card-text>
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn color="blue darken-1" text @click="closeDialog">Cancel</v-btn>
+                        <v-btn color="blue darken-1" text @click="updateItem">Save</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-toolbar>
         </template>
         <template v-slot:item.archieved="{ item }">
@@ -72,15 +72,21 @@
             <v-icon small @click="deleteItem(item)">delete</v-icon>
         </template>
     </v-data-table>
+    <pool v-bind:items="items"></pool>
+
 </div>
 
 </template>
 
 <script>
 import { db } from '../scripts/db'
+import Pool from '../components/Pool'
 
 export default {
   name: 'Overview',
+  components: {
+    Pool
+  },
   data () {
     return {
       headers: [
