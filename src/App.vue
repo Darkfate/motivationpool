@@ -1,6 +1,15 @@
 <template>
   <div id="app" data-app="true" class="v-application">
-    <v-app-bar app class="text-center">
+    <v-navigation-drawer :clipped="true" app>
+      <v-list dense nav>
+          <v-list-item v-for="item in navItems" :key="item.title" link>
+            <v-list-item-content>
+              <v-list-item-title><router-link :to="item.to">{{ item.title }}</router-link></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+    </v-navigation-drawer>
+    <v-app-bar :clipped-left="true" app>
       <h1>Motivational Pool</h1>
     </v-app-bar>
     <v-content>
@@ -11,7 +20,15 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      navItems: [
+        { title: 'Home', to: '/' },
+        { title: 'Overview', to: '/overview' }
+      ]
+    }
+  }
 }
 </script>
 
