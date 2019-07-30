@@ -6,6 +6,10 @@ The goals of the app are to:
 2. Let people update their progress so everyone can see it. Also calculate how many “units” such as ‘kilometers’ or ‘books’ are left for each person, and the remaining percentage.
 3. Make it easy to see when someone has achieved 100% of their goal.
 
+## Money Pool Implementation
+
+Currently we are calculating the current pool value by fetching all goals. This implementation obviously non scalable as the calculation will take longer as the list grows bigger. I chose this solution because I can demonstrated in VueJs. The better implementation would be to store the value somewhere which we calculate based of a trigger.
+
 ## Build Setup
 
 ``` bash
