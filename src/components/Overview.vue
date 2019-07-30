@@ -62,7 +62,7 @@
             {{item.goal}}{{item.unit}}
         </template>>
         <template v-slot:item.progress="{ item }">
-            {{item.goal}}{{item.unit}}
+            {{item.progress}}{{item.unit}}
         </template>>
         <template v-slot:item.achievement="{ item }">
             <div v-bind:class="{'green--text': getProgress(item) >= 0, 'red--text': getProgress(item) < 0}">{{getProgress(item)}}{{item.unit}}</div>
@@ -143,7 +143,8 @@ export default {
         progress: 0,
         unit: '',
         source: '',
-        detail: ''
+        detail: '',
+        ante: 10000
       }
 
       this.dialog = true
@@ -170,7 +171,8 @@ export default {
         progress: parseInt(rawData.progress || 0),
         unit: rawData.unit || '',
         source: rawData.source || '',
-        details: rawData.details || ''
+        details: rawData.details || '',
+        ante: parseInt(rawData.ante || 0)
       }
     }
   }
