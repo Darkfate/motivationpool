@@ -1,7 +1,11 @@
 <template>
-  <div id="app" data-app="true">
-    <h1>Motivational Pool</h1>
-    <router-view/>
+  <div id="app" data-app="true" class="v-application">
+    <v-app-bar app class="text-center">
+      <h1>Motivational Pool</h1>
+    </v-app-bar>
+    <v-content>
+      <router-view/>
+    </v-content>
   </div>
 </template>
 
